@@ -1,0 +1,64 @@
+﻿
+@model List<Post>
+
+<div class="container">
+	<div class="row pt-4 pb-3">
+		<div class="col-6">
+			<h2 class="text-primary">
+				Post List
+			</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controller="Post" asp-action="Create" class="btn btn-primary">
+				<i class="bi bi-file-plus"></i>Create New Post
+			</a>
+		</div>
+	</div>
+
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>
+					Title
+				</th>
+				<th>
+					Excerpt
+				</th>
+				<th>Author</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var obj in Model.OrderBy(u => u.Title))
+			{
+				<tr>
+					<td>@obj.Title</td>
+					<td>
+						@obj.Excerpt
+					</td>
+					<td>
+						@obj.Author
+					</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-controller="Post" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-primary mx-2">
+								<i class="bi bi-trash3-fill"></i>Edit
+							</a>
+						</div>
+					</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-controller="Post" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-primary mx-2">
+								<i class="bi bi-trash3-fill"></i>Delete
+							</a>
+						</div>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+
+	</table>
+</div>
